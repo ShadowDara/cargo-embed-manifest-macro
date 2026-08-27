@@ -53,7 +53,7 @@ pub fn generate(source: &str) -> Result<TokenStream2, String> {
 
     let mut output = TokenStream2::new();
 
-    for (key, value) in root {
+    for (key, value) in document {
         let ident = make_ident(key);
 
         let tokens = generate_value(&ident, value)?;
