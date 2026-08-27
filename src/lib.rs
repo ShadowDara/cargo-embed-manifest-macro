@@ -46,7 +46,7 @@ fn expand() -> Result<TokenStream2, String> {
     generate(&source)
 }
 
-pub fn generate(source: &str) -> Result<TokenStream2, String> {
+fn generate(source: &str) -> Result<TokenStream2, String> {
     let document: toml::Table = source.parse().map_err(|e| {
         format!("failed to parse Cargo.toml: {e}")
     })?;
@@ -54,9 +54,9 @@ pub fn generate(source: &str) -> Result<TokenStream2, String> {
     let mut output = TokenStream2::new();
 
     for (key, value) in document {
-        let ident = make_ident(key);
+        let ident = make_ident(&key);
 
-        let tokens = generate_value(&ident, value)?;
+        let tokens = generate_value(&ident, &value)?;
 
         output.extend(tokens);
     }
