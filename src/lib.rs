@@ -357,8 +357,7 @@ mod tests {
 
     #[test]
     fn print_generated_rust() {
-        let cargo_toml = r#"
-[package]
+        let cargo_toml = r#"[package]
 name = "hello-world"
 version = "1.2.3"
 edition = "2024"
@@ -376,8 +375,7 @@ bar = []
 
 [dependencies]
 serde = "1"
-tokio = { version = "1", features = ["full"] }
-"#;
+tokio = { version = "1", features = ["full"] }"#;
 
         let tokens = generate(cargo_toml.trim()).unwrap();
 
