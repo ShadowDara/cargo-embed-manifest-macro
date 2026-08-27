@@ -1,0 +1,19 @@
+[package]
+name = "hello-world"
+version = "1.2.3"
+edition = "2024"
+description = "A test application"
+
+[package.metadata.my_app]
+foo = "bar"
+enabled = true
+retries = 3
+
+[features]
+default = ["foo"]
+foo = ["serde"]
+bar = []
+
+[dependencies]
+serde = "1"
+tokio = { version = "1", features = ["full"] }
