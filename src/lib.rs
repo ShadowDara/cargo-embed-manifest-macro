@@ -373,7 +373,7 @@ bar = []
 serde = "1"
 tokio = { version = "1", features = ["full"] }"#;
 
-        let tokens = generate(cargo_toml.trim()).unwrap();
+        let tokens = generate(cargo_toml).unwrap();
 
         println!("\n========== GENERATED ==========\n");
         println!("{}", tokens);
