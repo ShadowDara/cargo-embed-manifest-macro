@@ -48,8 +48,8 @@ fn expand() -> Result<TokenStream2, String> {
 
 pub fn generate(source: &str) -> Result<TokenStream2, String> {
     let document: toml::Table = source.parse().map_err(|e| {
-    format!("failed to parse Cargo.toml: {e}")
-})?;
+        format!("failed to parse Cargo.toml: {e}")
+    })?;
 
     let mut output = TokenStream2::new();
 
