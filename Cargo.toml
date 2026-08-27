@@ -2,6 +2,13 @@
 name = "cargo-embed-manifest-macro"
 version = "0.1.0"
 edition = "2024"
+authors = [ "Shadowdara" ]
+readme = "README.md"
+description = "proc macros to embed the cargo toml data"
+license = "Apache-2.0"
+include = [ "LICENSE", "README.md", "Cargo.toml", "/src/" ]
+keywords = [ "samengine", "cli" ]
+repository = "https://github.com/shadowdara/cargo-embed-manifest-macro"
 
 [lib]
 proc-macro = true
