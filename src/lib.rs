@@ -47,13 +47,9 @@ fn expand() -> Result<TokenStream2, String> {
 }
 
 pub fn generate(source: &str) -> Result<TokenStream2, String> {
-    let document: toml::Value = source.parse().map_err(|e| {
-        format!("failed to parse Cargo.toml: {e}")
-    })?;
-
-    let root = document
-        .as_table()
-        .ok_or_else(|| "Cargo.toml root is not a table".to_string())?;
+    let document: toml::Table = source.parse().map_err(|e| {
+    format!("failed to parse Cargo.toml: {e}")
+})?;
 
     let mut output = TokenStream2::new();
 
