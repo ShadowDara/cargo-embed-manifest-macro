@@ -191,16 +191,18 @@ fn generate_array(
         });
     }
 
-    if values.iter().all(|v| matches!(v, toml::Value::String(_))) {
-        let values = values
-            .iter()
-            .map(|value| {
-                let value = value
-                    .as_str()
-                    .expect("checked above");
+    // Array<String>
+    if values
+        .iter()
+        .all(|v| matches!(v, toml::Value::String(_)))
+    {
+        let values = values.iter().map(|value| {
+            let value = value
+                .as_str()
+                .expect("checked above");
 
-                quote! { #value }
-            });
+            quote! { #value }
+        });
 
         return Ok(quote! {
             pub const #ident: &[&str] = &[
@@ -209,16 +211,18 @@ fn generate_array(
         });
     }
 
-    if values.iter().all(|v| matches!(v, toml::Value::Integer(_))) {
-        let values = values
-            .iter()
-            .map(|value| {
-                let value = value
-                    .as_integer()
-                    .expect("checked above");
+    // Array<Integer>
+    if values
+        .iter()
+        .all(|v| matches!(v, toml::Value::Integer(_)))
+    {
+        let values = values.iter().map(|value| {
+            let value = value
+                .as_integer()
+                .expect("checked above");
 
-                quote! { #value }
-            });
+            quote! { #value }
+        });
 
         return Ok(quote! {
             pub const #ident: &[i64] = &[
@@ -227,16 +231,18 @@ fn generate_array(
         });
     }
 
-    if values.iter().all(|v| matches!(v, toml::Value::Boolean(_))) {
-        let values = values
-            .iter()
-            .map(|value| {
-                let value = value
-                    .as_bool()
-                    .expect("checked above");
+    // Array<Boolean>
+    if values
+        .iter()
+        .all(|v| matches!(v, toml::Value::Boolean(_)))
+    {
+        let values = values.iter().map(|value| {
+            let value = value
+                .as_bool()
+                .expect("checked above");
 
-                quote! { #value }
-            });
+            quote! { #value }
+        });
 
         return Ok(quote! {
             pub const #ident: &[bool] = &[
@@ -245,16 +251,18 @@ fn generate_array(
         });
     }
 
-    if values.iter().all(|v| matches!(v, toml::Value::Float(_))) {
-        let values = values
-            .iter()
-            .map(|value| {
-                let value = value
-                    .as_float()
-                    .expect("checked above");
+    // Array<Float>
+    if values
+        .iter()
+        .all(|v| matches!(v, toml::Value::Float(_)))
+    {
+        let values = values.iter().map(|value| {
+            let value = value
+                .as_float()
+                .expect("checked above");
 
-                quote! { #value }
-            });
+            quote! { #value }
+        });
 
         return Ok(quote! {
             pub const #ident: &[f64] = &[
@@ -263,8 +271,16 @@ fn generate_array(
         });
     }
 
+    // Array<Table>
+    if values
+        .iter()
+        .all(|v| matches!(v, toml::Value::Table(_)))
+    {
+        return generate_table_array(ident, values);
+    }
+
     Err(format!(
-        "unsupported mixed TOML array for `{ident}`"
+        "unsupported TOML array for `{ident}`"
     ))
 }
 
